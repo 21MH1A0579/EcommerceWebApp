@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table
-public class ProductEntity {
+public class Product {
 	     @Id
 	    @GeneratedValue(strategy = GenerationType.UUID)
 	    private UUID id;
