@@ -17,10 +17,13 @@ public class ProductService {
 		return repo.save(newProd);
 	}
 	
-	public java.util.List<Product> getAllProducts(){
+	public java.util.List<Product> getAllProducts(String search){
+		if(search!=null && !search.isEmpty())
+		{
+			return repo.findByNameOrBrandContainingIgnoreCase(search);
+		}
 		
-		java.util.List<Product> productlist=repo.findAll();
-		return productlist;
+		return repo.findAll();
 	}
 
 }
