@@ -25,5 +25,9 @@ public class ProductService {
 		
 		return repo.findAll();
 	}
+	public Product getProductById(UUID id) throws Exception {
+        return repo.findById(id)
+                .orElseThrow(() -> new Exception("Product not found with id: " + id));
+    }
 
 }

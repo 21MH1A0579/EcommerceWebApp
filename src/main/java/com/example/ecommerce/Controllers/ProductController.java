@@ -3,6 +3,10 @@ package com.example.ecommerce.Controllers;
 import com.example.ecommerce.Models.Product;
 import com.example.ecommerce.Services.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class ProductController {
@@ -26,9 +31,27 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    @Operation(summary = "Get All Products From DataBase.")
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> allProducts = newService.getAllProducts();
+    @Operation(summary = "Get all products or search by name/brand")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Products found",
+                     content = @Content(schema = @Schema(implementation = Product.class)))
+    })
+    public ResponseEntity<List<Product>> getAllProducts(  @Parameter(description = "Search term for product name or brand")@RequestParam(required=false) String search) {
+        List<Product> allProducts = newService.getAllProducts(search);
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
+    }
+    
+    @GetMapping("/{id}")
+    @Operation(summary = "Get product by ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Product found",
+                     content = @Content(schema = @Schema(implementation = Product.class))),
+        @ApiResponse(responseCode = "404", description = "Product not found")
+    })
+    public ResponseEntity<Product> getProductById(
+            @Parameter(description = "Product ID", required = true)
+            @PathVariable UUID id) throws Exception {
+        Product product = newService.getProductById(id);
+        return ResponseEntity.ok(product);
     }
 }
