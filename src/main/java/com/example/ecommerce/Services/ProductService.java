@@ -15,9 +15,10 @@ public class ProductService {
 	@Autowired
 	ProductRepo repo;
 	
-	public Product insertOne(Product newProd) {
-		return repo.save(newProd);
+	public List<Product> insertProducts(List<Product> products) {
+	    return repo.saveAll(products);
 	}
+
 	
 	public java.util.List<Product> getAllProducts(String search) {
 		if(search != null && !search.isEmpty()) {

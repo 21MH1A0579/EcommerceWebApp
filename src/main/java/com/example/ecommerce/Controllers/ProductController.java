@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +17,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/products")
+@RequiredArgsConstructor
+@Tag(name = "Product API", description = "Operations for e-commerce products")
+@CrossOrigin(origins = "*") 
 public class ProductController {
 
     @Autowired
@@ -26,12 +31,16 @@ public class ProductController {
 
     @PostMapping("/insert")
     @Operation(summary = "Insert a new Product into DataBase.")
-    public ResponseEntity<Product> createProduct(@RequestBody Product newProduct) {
-        Product insertedProduct = newService.insertOne(newProduct);
-        return new ResponseEntity<>(insertedProduct, HttpStatus.CREATED);
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "New Product Inserted SuccessFully.",
+                         content = @Content(schema = @Schema(implementation = Product.class)))
+        })
+    public ResponseEntity<List<Product>> createProduct(@RequestBody List<Product> newProducts) {
+        List<Product> insertedProducts = newService.insertProducts(newProducts);
+        return new ResponseEntity<>(insertedProducts, HttpStatus.CREATED);
     }
 
-    @GetMapping("/products")
+    @GetMapping
     @Operation(summary = "Get all products or search by name/brand")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Products found",
@@ -42,7 +51,7 @@ public class ProductController {
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
     }
     
-    @GetMapping("product/{id}")
+    @GetMapping("/{id}")
     @Operation(summary = "Get product by ID")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Product found",

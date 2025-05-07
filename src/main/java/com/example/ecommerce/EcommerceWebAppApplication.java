@@ -6,16 +6,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 
 @SpringBootApplication
-@OpenAPIDefinition( 
-		info=@Info(
-				title="EcommorceWebApp-BackEnd",
-				version="1.0",
-				description="DEVELOPED BY BRAHMENDRA",
-				contact=@Contact(name="CHALUMURI BRAHMENDRA",email="chalumuribrahmendra@gmail.com")
-				)  
-		)
+@OpenAPIDefinition(
+	    info = @Info(
+	        title = "E-commerce API",
+	        version = "1.0",
+	        description = "REST API for E-commerce Product Search and Details",
+	        contact = @Contact(name = "chalumuri Brahmendra", email = "chalumuribrahmendra@gmail.com")
+	    ),
+	    servers = {
+	        @Server(url = "http://localhost:8085", description = "Local Development Server")
+	    }
+	)
 public class EcommerceWebAppApplication {
 
 	public static void main(String[] args) {
