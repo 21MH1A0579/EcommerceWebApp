@@ -42,17 +42,17 @@ public class ProductController {
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
     }
     
-//    @GetMapping("/{id}")
-//    @Operation(summary = "Get product by ID")
-//    @ApiResponses(value = {
-//        @ApiResponse(responseCode = "200", description = "Product found",
-//                     content = @Content(schema = @Schema(implementation = Product.class))),
-//        @ApiResponse(responseCode = "404", description = "Product not found")
-//    })
-//    public ResponseEntity<Optional<Product>> getProductById(
-//            @Parameter(description = "Product ID", required = true)
-//            @PathVariable UUID id){
-//        Optional<Product> product = newService.getProductById(id);
-//        return ResponseEntity.ok(product);
-//    }
+    @GetMapping("product/{id}")
+    @Operation(summary = "Get product by ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Product found",
+                     content = @Content(schema = @Schema(implementation = Product.class))),
+        @ApiResponse(responseCode = "404", description = "Product not found")
+    })
+    public ResponseEntity<Product> getProductById(
+            @Parameter(description = "Product ID", required = true)
+            @PathVariable UUID id){
+       Product product =newService.getProductById(id);
+        return ResponseEntity.ok(product);
+    }
 }

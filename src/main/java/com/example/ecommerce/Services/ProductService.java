@@ -7,10 +7,11 @@ import com.example.ecommerce.Exceptions.ResourceNotFoundException;
 import com.example.ecommerce.Models.Product;
 import com.example.ecommerce.Repository.ProductRepo;
 
-import jakarta.validation.constraints.AssertFalse.List;
 import java.util.*;
+
 @Service
 public class ProductService {
+	
 	@Autowired
 	ProductRepo repo;
 	
@@ -18,17 +19,16 @@ public class ProductService {
 		return repo.save(newProd);
 	}
 	
-	public java.util.List<Product> getAllProducts(String search){
-		if(search!=null && !search.isEmpty())
-		{
+	public java.util.List<Product> getAllProducts(String search) {
+		if(search != null && !search.isEmpty()) {
 			return repo.findByNameOrBrandContainingIgnoreCase(search);
 		}
 		
 		return repo.findAll();
 	}
-//	public Optional<Product> getProductById(UUID id){
-//        return repo.findById(id);
-////        		 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
-//    }
-
+	
+	public Product getProductById(UUID id) {
+		return repo.findById(id)
+	        .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+	}
 }

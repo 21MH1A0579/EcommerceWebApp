@@ -39,7 +39,7 @@ public class ErrorResponse {
 		this.path = path;
 	}
 	public ErrorResponse(LocalDateTime timestamp, int status, String error, String message, String path) {
-		super();
+		
 		this.timestamp = timestamp;
 		this.status = status;
 		this.error = error;
@@ -47,13 +47,8 @@ public class ErrorResponse {
 		this.path = path;
 	}
 	public ErrorResponse() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	@Override
-	public String toString() {
-		return "ErrorResponse [timestamp=" + timestamp + ", status=" + status + ", error=" + error + ", message="
-				+ message + ", path=" + path + "]";
-	}
+
     
 }

@@ -107,6 +107,30 @@ public class Product {
 		public void setImageUrl(String imageUrl) {
 			this.imageUrl = imageUrl;
 		}
+
+		public Product(UUID id, @NotBlank(message = "Product name is required") String name, String description,
+				@NotNull(message = "Price is required") @Positive(message = "Price must be positive") BigDecimal price,
+				String brand, ProductCategory category, String imageUrl) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.description = description;
+			this.price = price;
+			this.brand = brand;
+			this.category = category;
+			this.imageUrl = imageUrl;
+		}
+
+		public Product() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		public String toString() {
+			return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
+					+ ", brand=" + brand + ", category=" + category + ", imageUrl=" + imageUrl + "]";
+		}
 	    
 
 }
