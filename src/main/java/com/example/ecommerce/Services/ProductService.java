@@ -3,6 +3,7 @@ package com.example.ecommerce.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.ecommerce.Exceptions.ResourceNotFoundException;
 import com.example.ecommerce.Models.Product;
 import com.example.ecommerce.Repository.ProductRepo;
 
@@ -25,9 +26,9 @@ public class ProductService {
 		
 		return repo.findAll();
 	}
-	public Product getProductById(UUID id) throws Exception {
-        return repo.findById(id)
-                .orElseThrow(() -> new Exception("Product not found with id: " + id));
-    }
+//	public Optional<Product> getProductById(UUID id){
+//        return repo.findById(id);
+////        		 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+//    }
 
 }
