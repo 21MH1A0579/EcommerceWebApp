@@ -138,6 +138,3 @@ The API implements proper error handling with appropriate HTTP status codes and 
 - Implement product ratings and reviews
 - Add authentication and user management
 
-## License
-
-[MIT License](LICENSE)
