@@ -55,9 +55,9 @@ The server will start on `http://localhost:8080`.
 
 ## Database Configuration
 
-By default, the application uses an H2 in-memory database. Sample product data is automatically loaded via data.sql on startup.
+By default, the application uses an MYSQL database. Sample product data is automatically loaded via data.sql on startup.
 
-To use PostgreSQL instead (optional):
+To use PostgreSQL instead :
 
 1. Uncomment the PostgreSQL configuration in `application.properties`
 2. Update the database credentials in `application.properties`
