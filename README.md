@@ -14,7 +14,7 @@ The backend provides REST APIs to:
 - Java 17
 - Spring Boot 3.1.x
 - Spring Data JPA
-- H2 Database (in-memory)
+- MySQL DataBase
 - Swagger/OpenAPI for API documentation
 - Maven for dependency management and build
 
